@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%! //declation 선언부
 	private int numOne = 0;
-
+	//tomcat이 서버를 실행할때 생기는 객체
 	public void jspInit() {	//오버라이딩 
 		System.out.println("jspInit() 호출됨!");
 	}
@@ -19,7 +19,7 @@
 </head>
 <body>	
 <% //스크립틀릿 
-	int numTwo = 0;	//스크립클립 안에 선언된 변수는 지역변수
+	int numTwo = 0;	//스크립클립 안에 선언된 변수는 지역변수 
 	numOne++;	//새로고침 시 마다 증가
 	numTwo++;	//새로고침 시 마다 초기화
 %>
