@@ -11,16 +11,27 @@
   </welcome-file-list>
   
   <!-- 에러페이지 설정 시작! -->
-  <error-page>
-  <error-code>404</error-code>
-  <location>/error/Ex09_error404.jsp</location>
-  </error-page>
+<!--   <error-page> -->
+<!--   <error-code>404</error-code> -->
+<!--   <location>/error/Ex09_error404.jsp</location> -->
+<!--   </error-page> -->
   
-  <error-page>
-  <error-code>500</error-code>
-  <location>/error/Ex09_error500.jsp</location>
-  </error-page>
+<!--   <error-page> -->
+<!--   <error-code>500</error-code> -->
+<!--   <location>/error/Ex09_error500.jsp</location> -->
+<!--   </error-page> -->
   <!-- 에러페이지 설정 종료 -->
+  
+  <!-- 초기화 파라미터 설정 -->
+  <!-- 이것은 웹 어플리케이션이 구동(서비스)되면 읽어서 Application객체에 저장함 -->
+  <context-param>
+  <param-name>파라미터1</param-name>
+  <param-value>파라미터 값1</param-value>
+  </context-param>
+  <context-param>
+  <param-name>파라미터2</param-name>
+  <param-value>파라미터 값2</param-value>
+  </context-param>
 </web-app>
 
 
