@@ -2,17 +2,17 @@
     pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
 <%
-    	Class.forName("oracle.jdbc.OracleDriver-Djava.security.egd=file:///dev/urandom");
+    	Class.forName("oracle.jdbc.OracleDriver");
     	Connection conn = null;
     	Statement stmt = null;
     	ResultSet rs = null;
- String id = "", password = "", name = "", mem_num1 = "", mem_num2 = "",
-		 e_mail = "", phone = "", zipcode ="", address = "", job = "";
- int counter = 0;
+ 		String id = "", password = "", name = "", mem_num1 = "", mem_num2 = "",
+			   e_mail = "", phone = "", zipcode ="", address = "", job = "";
+ 		int counter = 0;
  
  try{
 	 conn = DriverManager.getConnection(
-		"jdbc:oracle:thin:@DB202112211148_medium?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202112211148/",
+		"jdbc:oracle:thin:@db202112211148_high?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202112211148",
 		"admin", "YUYUyuyu25864966?");
 	 stmt = conn.createStatement();
 	 rs = stmt.executeQuery("select * from TEMPMEMBER");
