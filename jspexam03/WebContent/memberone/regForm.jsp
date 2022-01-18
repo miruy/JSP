@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="script.js"></script>
 <meta charset="UTF-8">
 <title>Register Form</title>>
 <link href="css/style.css" rel="stylesheet" type="text/css"/>
 <link href="css/regFormstyle.css" rel="stylesheet" type="text/css"/>
+<script src="script.js"></script>
 </head>
 <body>
 <section>
@@ -19,7 +19,7 @@
 	</tr>
 	<tr>
 		<td>아이디 : </td><td><input type="text" name="id" required/>
-		<input type="button" value="중복확인" onClick="idcheck(this.form.id.value)"/></td>
+		<input type="button" value="중복확인" onClick="idCheck(this.form.id.value)"/></td>
 	</tr>
 	<tr>
 		<td>패스워드 : </td>
