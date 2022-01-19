@@ -11,7 +11,7 @@
 <body>
 <section>
 	<article class="login">
-		<form method="post" action="#">
+		<form method="post" action="loginProc.jsp">
 		<table class="loginTable">
 		<tr>
 		<th colspan="2">회원 로그인</th>

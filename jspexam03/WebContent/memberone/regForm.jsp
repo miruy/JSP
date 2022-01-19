@@ -35,7 +35,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" class="regsubmit">
-		<input type="button" value="회원가입" onclick="#"/>
+		<input type="button" value="회원가입" onclick="inputCheck()"/>
 		<input type="reset" value="다시 입력"/>
 		</td>
 	</tr>
