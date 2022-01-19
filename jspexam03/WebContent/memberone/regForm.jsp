@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Register Form</title>>
+<title>Register Form</title>
 <link href="css/style.css" rel="stylesheet" type="text/css"/>
 <link href="css/regFormstyle.css" rel="stylesheet" type="text/css"/>
 <script src="script.js"></script>
