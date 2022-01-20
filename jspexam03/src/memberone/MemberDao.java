@@ -1,55 +1,52 @@
 package memberone;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 public class MemberDao {
-//	public static String ID = "admin";
-//	public static String PASSWORD = "YUYUyuyu25864966?";
-//	public static String IP = "jdbc:oracle:thin:@db202112211148_high?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202112211148";
-//	static {
+	public static String ID = "admin";
+	public static String PASSWORD = "YUYUyuyu25864966?";
+	public static String IP = "jdbc:oracle:thin:@db202112211148_high?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202112211148";
+	static {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Connection getConnection() throws SQLException{
+		return DriverManager.getConnection(IP, ID, PASSWORD);
+	}
+//	private static MemberDao instance = null;
+//	private MemberDao() {}
+//	public static MemberDao getInstance() {
+//		if(instance == null) {
+//			synchronized(MemberDao.class) {
+//				instance = new MemberDao();
+//			}
+//		}
+//		return instance;
+//	}		
+	
+//	private static DataSource ds = null;
+//	{
 //		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//		}catch(ClassNotFoundException e) {
-//			e.printStackTrace();
+//			Context init = new InitialContext();
+//			ds = (DataSource)init.lookup("java:comp/env/jdbc/myOracle");
+//		}catch(Exception e){
+//			System.out.println("Connection 실패");
 //		}
 //	}
-//	
-//	public static Connection getConnection() throws SQLException{
-//		return DriverManager.getConnection(IP, ID, PASSWORD);
+	
+//	public Connection getConnection() throws SQLException{
+//		return ds.getConnection();
 //	}
-	private static MemberDao instance = null;
-	private MemberDao() {}
-	public static MemberDao getInstance() {
-		if(instance == null) {
-			synchronized(MemberDao.class) {
-				instance = new MemberDao();
-			}
-		}
-		return instance;
-	}
-	
-	private static DataSource ds = null;
-	{
-		try {
-			Context init = new InitialContext();
-			ds = (DataSource)init.lookup("java:comp/env/jdbc/myOracle");
-		}catch(Exception e){
-			System.out.println("Connection 실패");
-		}
-	}
-	
-	public Connection getConnection() throws SQLException{
-		return ds.getConnection();
-	}
 	
 	public boolean idCheck(String id) {
 		boolean result = true;
