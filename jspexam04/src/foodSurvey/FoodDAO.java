@@ -5,20 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FoodDAO {
 	private static FoodDAO instance;
-	private JdbcTamplate jdbcTamplate;
+	private JdbcTemplate jdbcTemplate;
 	
-	public FoodDAO() {
-		jdbcTamplate = JdbcTamplate.getInstance();
+	private FoodDAO() {
+		jdbcTemplate = JdbcTemplate.getInstance();
 	}
 	
 	public static FoodDAO getInstance() {
 		synchronized(FoodDAO.class) {
 			if(instance == null) {
 				instance = new FoodDAO();
-			}
+			}	
 		}
 		return instance;
 	}
@@ -35,7 +36,7 @@ public class FoodDAO {
 		int result = -1;
 		
 		try {
-			conn = jdbcTamplate.getConnection();
+			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, fv.getMenu());
@@ -61,15 +62,15 @@ public class FoodDAO {
 		return result;
 	}
 	
-	public ArrayList<FoodVO> selectAll(){
+	public List<FoodVO> selectAll(){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<FoodVO> al = new ArrayList<>();
-		String sql = "select * from FOOD";
+		List<FoodVO> result =  new ArrayList<>();
+		String sql = "select * from FOOD order by NUM asc";
 		
 		try {
-			conn = jdbcTamplate.getConnection();
+			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -78,7 +79,7 @@ public class FoodDAO {
 				rs.getInt(1),
 				rs.getString(2),
 				rs.getInt(3));
-			al.add(fv);	
+				result.add(fv);	
 			}
 			
 		} catch (SQLException e) {
@@ -99,7 +100,7 @@ public class FoodDAO {
 				}
 			}
 		}
-		return al;
+		return result;
 	}
 	
 }
