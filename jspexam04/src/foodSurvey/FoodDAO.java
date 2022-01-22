@@ -25,10 +25,6 @@ public class FoodDAO {
 	}
 	
 	//CRUD
-//	public int insert(String menu, int vote) {
-//		return insert(new FoodVO(0,menu,vote));
-//	}
-	
 	public int insert(FoodVO fv) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -93,6 +89,39 @@ public class FoodDAO {
 				}
 			}
 			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+	
+	public int update(String food) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update FOOD set VOTE = vote+1 where MENU = ?";
+		int result = -1;
+		
+		try {
+			conn = jdbcTemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, food);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}if(conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
