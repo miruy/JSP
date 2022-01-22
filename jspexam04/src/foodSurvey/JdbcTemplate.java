@@ -9,7 +9,7 @@ public class JdbcTemplate {
 
 	String user = "admin";
 	String password = "YUYUyuyu25864966?";
-	String url = "jdbc:oracle:thin:@DB202112211148_medium?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202112211148";
+	String url = "jdbc:oracle:thin:@DB202201222227_medium?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202201222227";
 
 	private JdbcTemplate() {
 		try {
