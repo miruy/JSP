@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource name="jdbc/MyOracle"
+	<Resource name="jdbc/myOracle"
 			auth="Container"
 			driverClassName="oracle.jdbc.driver.OracleDriver"
-			type="javax.sql.DtaSource"
+			type="javax.sql.DataSource"
 			url="jdbc:oracle:thin:@DB202201222227_medium?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202201222227"
 			username="admin"
 			password="YUYUyuyu25864966?"
@@ -11,7 +11,6 @@
 			maxTotal="20"
 			maxIdle="10"
 			maxWaitMillis="10000"/>
-</Context>
 <!-- 
 initiaSize
 : 최초 시점에 getConnection()을 통해 커넥션 풀에 채워 넣을 커넥션 개수
@@ -24,3 +23,4 @@ minIdle
 maxWaitMillis
 : pool이 고갈 되었을 경우 최대 대기 시간 
 -->
+</Context>
