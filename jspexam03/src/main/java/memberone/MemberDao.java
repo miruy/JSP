@@ -8,21 +8,26 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import memberone.MemberDao;
+import memberone.JdbcTemplate;
+
 public class MemberDao {
-	public static String ID = "admin";
-	public static String PASSWORD = "YUYUyuyu25864966?";
-	public static String IP = "jdbc:oracle:thin:@db202112211148_high?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202112211148";
-	static {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		}catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	private static MemberDao instance;
+	private JdbcTemplate jdbcTemplate;
+	
+	private MemberDao() {
+		jdbcTemplate = JdbcTemplate.getInstance();
 	}
 	
-	public static Connection getConnection() throws SQLException{
-		return DriverManager.getConnection(IP, ID, PASSWORD);
+	public static MemberDao getInstance() {
+		synchronized(MemberDao.class) {
+			if(instance == null) {
+				instance = new MemberDao();
+			}	
+		}
+		return instance;
 	}
+	
 //	private static MemberDao instance = null;
 //	private MemberDao() {}
 //	public static MemberDao getInstance() {
@@ -54,7 +59,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			conn = getConnection();
+			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement(
 					"select * from MEMBER where id = ?");
 			pstmt.setString(1, id);
@@ -85,7 +90,7 @@ public class MemberDao {
 		ResultSet rs = null;
 		boolean flag = false;
 		try {
-			conn = getConnection();
+			conn = jdbcTemplate.getConnection();
 			String strQuery = "insert into MEMBER values(?,?,?,?)";
 			pstmt = conn.prepareStatement(strQuery);
 			pstmt.setString(1, dto.getId());
@@ -109,7 +114,7 @@ public class MemberDao {
 		ResultSet rs = null;
 		int check = -1;
 		try {
-			conn = getConnection();
+			conn = jdbcTemplate.getConnection();
 			String query = "select PASS from MEMBER where ID = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -135,7 +140,7 @@ public class MemberDao {
 		ResultSet rs = null;
 		MemberDto dto = null;
 		try {
-			conn = getConnection();
+			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement("select * from MEMBER where ID = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -161,7 +166,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = getConnection();
+			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement("update MEMBER set PASS = ?, EMAIL = ? where ID = ?");
 			pstmt.setString(1, dto.getPass());
 			pstmt.setString(2, dto.getEmail());
@@ -182,7 +187,7 @@ public class MemberDao {
 		String dbPass = "";	//데이터베이스에 실제 저장된 비밀번호
 		int result = -1;
 		try {
-			conn = getConnection();
+			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement("select PASS from MEMBER where ID = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

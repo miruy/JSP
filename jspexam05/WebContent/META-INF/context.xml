@@ -2,15 +2,14 @@
 <Context>
 	<Resource name="jdbc/myOracle"
 			auth="Container"
-			driverClassName="oracle.jdbc.driver.OracleDriver"
+			driverClassName="oracle.jdbc.OracleDriver"
 			type="javax.sql.DataSource"
-			url="jdbc:oracle:thin:@DB202201222227_medium?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202201222227"
+			url="jdbc:oracle:thin:@DB202201222227_medium?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202201222227/"
 			username="admin"
 			password="YUYUyuyu25864966?"
-			initialSize="50"
-			maxTotal="20"
-			maxIdle="10"
-			maxWaitMillis="10000"/>
+			initiaSize="2"
+			maxTotal="3"
+			minIdle="2"/>
 <!-- 
 initiaSize
 : 최초 시점에 getConnection()을 통해 커넥션 풀에 채워 넣을 커넥션 개수

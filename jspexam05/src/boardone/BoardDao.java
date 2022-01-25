@@ -4,15 +4,32 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class BoardDao {
 	private static BoardDao instance = null;
-	private BoardDao() {}
-	public static BoardDao getInstance() {
-		if(instance == null) {
-			synchronized(BoardDao.class) {
-				instance = new BoardDao();
+	private DataSource pool;
+	
+	private BoardDao() {
+			try {
+				Context ctx = new InitialContext();
+				pool = (DataSource)ctx.lookup("java:comp/env/jdbc/myOracle");
+			} catch (NamingException e) {
+				e.printStackTrace();
 			}
+	}
+	
+	public static BoardDao getInstance() {
+		synchronized(BoardDao.class) {
+			if(instance == null) {
+				instance = new BoardDao();
+			}	
 		}
 		return instance;
 	}
@@ -28,7 +45,7 @@ public class BoardDao {
 		int number = 0;
 		String sql = "";
 		try {
-			conn = ConnUtil.getConnection();
+			conn = pool.getConnection();
 			pstmt = conn.prepareStatement("select max(NUM) from BOARD");
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -77,17 +94,86 @@ public class BoardDao {
 			}
 		}
 		
+	public int getArticleCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x = 0;
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select count(*) from BOARD");
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				x = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) try {rs.close();}catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();}catch(SQLException e) {}
+			if(conn != null) try {conn.close();}catch(SQLException e) {}
+		}
+		return x;
+	}
+	
+	public List<BoardDto> getArticles(/*수정 1*/){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BoardDto> articleList = null;
+		try {
+			conn = pool.getConnection();
+			/*수정 2*/
+			pstmt = conn.prepareStatement("select * from BOARD order by NUM desc");
+			/*수정 3*/
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				articleList = new ArrayList<BoardDto>();
+				/*수정 4*/
+				do {
+					BoardDto article = new BoardDto();
+					article.setNum(rs.getInt("num"));
+					article.setWriter(rs.getString("writer"));
+					article.setEmail(rs.getString("email"));
+					article.setSubject(rs.getString("subject"));
+					article.setPass(rs.getString("Pass"));
+					article.setRegdate(rs.getTimestamp("regdate"));
+					article.setReadcount(rs.getInt("readcount"));
+					article.setRef(rs.getInt("ref"));
+					article.setStep(rs.getInt("step"));
+					article.setDepth(rs.getInt("depth"));
+					article.setContent(rs.getString("content"));
+					article.setIp(rs.getString("ip"));
+					articleList.add(article);
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) try {rs.close();}catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();}catch(SQLException e) {}
+			if(conn != null) try {conn.close();}catch(SQLException e) {}
+		}
+		return articleList;
+	}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
