@@ -157,7 +157,120 @@ public class BoardDao {
 		return articleList;
 	}
 		
+	public BoardDto getArticle(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardDto article = null;
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(
+					"update BOARD set READCOUNT = READCOUNT+1 where NUM = ?");
+			pstmt.setInt(1, num);
+			pstmt.executeQuery();
+			pstmt.close();
+			pstmt = conn.prepareStatement("select * from BOARD where NUM = ?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				article = new BoardDto();
+					article.setNum(rs.getInt("num"));
+					article.setWriter(rs.getString("writer"));
+					article.setEmail(rs.getString("email"));
+					article.setSubject(rs.getString("subject"));
+					article.setPass(rs.getString("Pass"));
+					article.setRegdate(rs.getTimestamp("regdate"));
+					article.setReadcount(rs.getInt("readcount"));
+					article.setRef(rs.getInt("ref"));
+					article.setStep(rs.getInt("step"));
+					article.setDepth(rs.getInt("depth"));
+					article.setContent(rs.getString("content"));
+					article.setIp(rs.getString("ip"));
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) try {rs.close();}catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();}catch(SQLException e) {}
+			if(conn != null) try {conn.close();}catch(SQLException e) {}
+		}
+		return article;
+	}
+
+	public BoardDto updateGetArticle(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardDto article = null;
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select * from BOARD where NUM = ?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				article = new BoardDto();
+					article.setNum(rs.getInt("num"));
+					article.setWriter(rs.getString("writer"));
+					article.setEmail(rs.getString("email"));
+					article.setSubject(rs.getString("subject"));
+					article.setPass(rs.getString("Pass"));
+					article.setRegdate(rs.getTimestamp("regdate"));
+					article.setReadcount(rs.getInt("readcount"));
+					article.setRef(rs.getInt("ref"));
+					article.setStep(rs.getInt("step"));
+					article.setDepth(rs.getInt("depth"));
+					article.setContent(rs.getString("content"));
+					article.setIp(rs.getString("ip"));
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) try {rs.close();}catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();}catch(SQLException e) {}
+			if(conn != null) try {conn.close();}catch(SQLException e) {}
+		}
+		return article;
+	}
 	
+	public int updateArticle(BoardDto article) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String dbpassword = "";
+		String sql = "";
+		int result = -1;	//결과 값 
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select PASS from BOARD where NUM = ?");
+			pstmt.setInt(1, article.getNum());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dbpassword = rs.getNString("pass");	//비밀번호 비교
+				if(dbpassword.equals(article.getPass())) {
+					sql = "update BOARD set WRITER = ?, EMAIL = ?,"
+							+ "SUBJECT = ?, CONTENT = ? where NUM = ?";
+					pstmt.close();
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, article.getWriter());
+					pstmt.setString(2, article.getEmail());
+					pstmt.setString(3, article.getSubject());
+					pstmt.setString(4, article.getContent());
+					pstmt.setInt(5, article.getNum());
+					pstmt.executeQuery();
+					result = 1;	//수정 성공 
+				}else {
+					result = 0;	//수정 실패
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) try {rs.close();}catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();}catch(SQLException e) {}
+			if(conn != null) try {conn.close();}catch(SQLException e) {}
+		}
+		return result;
+	}
 }
 
 

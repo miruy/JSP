@@ -49,7 +49,7 @@
 			<%
 				}else{
 			%>		
-				<table>
+				<table class="listtable">
 					<tr>
 						<th id="num">번 호</th>
 						<th id="title">제 목</th>
