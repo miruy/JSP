@@ -245,7 +245,7 @@ public class BoardDao {
 			pstmt.setInt(1, article.getNum());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				dbpassword = rs.getNString("pass");	//비밀번호 비교
+				dbpassword = rs.getString("pass");	//비밀번호 비교
 				if(dbpassword.equals(article.getPass())) {
 					sql = "update BOARD set WRITER = ?, EMAIL = ?,"
 							+ "SUBJECT = ?, CONTENT = ? where NUM = ?";
@@ -260,6 +260,41 @@ public class BoardDao {
 					result = 1;	//수정 성공 
 				}else {
 					result = 0;	//수정 실패
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) try {rs.close();}catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();}catch(SQLException e) {}
+			if(conn != null) try {conn.close();}catch(SQLException e) {}
+		}
+		return result;
+	}
+	
+	public int deleteArticle(int num, String pass) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String dbpasswd = "";	
+		int result = -1;	//결과 값 
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(
+					"select PASS from BOARD where NUM = ?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dbpasswd = rs.getString("pass");	//비밀번호 비교
+				if(dbpasswd.equals(pass)) {
+					pstmt.close();
+					pstmt = conn.prepareStatement(
+							"delete from BOARD where NUM = ?");
+					pstmt.setInt(1, num);
+					pstmt.executeQuery();
+					result = 1;	//글삭제 성공 
+				}else {
+					result = 0;	//비밀번호 틀림
 				}
 			}
 		}catch(Exception e) {
