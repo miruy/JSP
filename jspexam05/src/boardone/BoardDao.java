@@ -116,20 +116,27 @@ public class BoardDao {
 		return x;
 	}
 	
-	public List<BoardDto> getArticles(/*수정 1*/){
+//	public List<BoardDto> getArticles(/*수정 1*/){
+	public List<BoardDto> getArticles(int start, int end){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<BoardDto> articleList = null;
 		try {
 			conn = pool.getConnection();
-			/*수정 2*/
-			pstmt = conn.prepareStatement("select * from BOARD order by NUM desc");
+//			pstmt = conn.prepareStatement("select * from BOARD order by NUM desc");
+			pstmt = conn.prepareStatement(
+				    "select * from (select rownum rnum, num, writer, email, subject, pass,"
+				    + "regdate, readcount, ref, step, depth, content, ip from ("
+				        + "select * from board order by ref desc, step asc)) where rnum>=? and rnum<=?");
 			/*수정 3*/
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				articleList = new ArrayList<BoardDto>();
-				/*수정 4*/
+//				articleList = new ArrayList<BoardDto>();
+				articleList = new ArrayList<BoardDto>(10);
 				do {
 					BoardDto article = new BoardDto();
 					article.setNum(rs.getInt("num"));

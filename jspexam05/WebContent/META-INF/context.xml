@@ -4,11 +4,11 @@
 			auth="Container"
 			driverClassName="oracle.jdbc.OracleDriver"
 			type="javax.sql.DataSource"
-			url="jdbc:oracle:thin:@DB202201222227_medium?TNS_ADMIN=/Users/kim-yurim/Documents/workspace/Wallet_DB202201222227/"
-			username="admin"
-			password="YUYUyuyu25864966?"
-			initiaSize="2"
-			maxTotal="3"
+			url="jdbc:oracle:thin:@itthis.kr:1521:xe"
+			username="urimkim"
+			password="1234"
+			initiaSize="50"
+			maxTotal="20"
 			minIdle="2"/>
 <!-- 
 initiaSize

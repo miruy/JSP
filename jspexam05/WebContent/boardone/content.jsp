@@ -63,6 +63,11 @@
 							 	'deleteForm.jsp?num=<%=article.getNum() %>&pageNum=<%=pageNum %>'">
 							 		&nbsp;&nbsp;&nbsp;&nbsp;
 							 <!-- 수정 1 -->	
+							 <input type="button" value="답글"
+							 onClick="document.location.href=
+								 'writeForm.jsp?num=<%=num %>&ref=<%=ref %>&step=<%=step %>&depth=<%=depth %>'">
+							 
+							 
 							 	<input type="button" value="글 목록"
 							 	onClick="document.location.href=
 							 	'list.jsp?pageNum=<%=pageNum%>'">
