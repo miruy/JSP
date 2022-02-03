@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resours-ref>
-	<description>ConnectionPool</description>
-	<res-ref-name>jdbc/myOracle</res-ref-name>
-	<res-type>javax.sql.DataSource</res-type>
-	<res-auth>Container</res-auth>
-	</resours-ref>
