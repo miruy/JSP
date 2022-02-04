@@ -15,7 +15,7 @@
   	<servlet-class>servletex.Loader</servlet-class>
   		<init-param>
 			<param-name>jdbcdriver</param-name>  
-			<param-value>oracle.jdbc.driver.OracleDriver</param-value>		
+			<param-value>oracle.jdbc.OracleDriver</param-value>		
   		</init-param>
   	<load-on-startup>1</load-on-startup>	
   </servlet>
@@ -25,11 +25,11 @@
   	<servlet-class>servletex.InitParamEx</servlet-class>
   		<init-param>
   			<param-name>url</param-name>
-  			<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  			<param-value>jdbc:oracle:thin:@itthis.kr:1521:xe</param-value>
   		</init-param>
   		<init-param>
   			<param-name>account</param-name>
-  			<param-value>tester</param-value>
+  			<param-value>urimkim</param-value>
   		</init-param>
   		<init-param>
   			<param-name>password</param-name>
