@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>ServletTest2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>JDBCDriverLoader</servlet-name>
+  	<servlet-class>servletex.Loader</servlet-class>
+  		<init-param>
+			<param-name>jdbcdriver</param-name>  
+			<param-value>oracle.jdbc.driver.OracleDriver</param-value>		
+  		</init-param>
+  	<load-on-startup>1</load-on-startup>	
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>InitParamEx</servlet-name>
+  	<servlet-class>servletex.InitParamEx</servlet-class>
+  		<init-param>
+  			<param-name>url</param-name>
+  			<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  		</init-param>
+  		<init-param>
+  			<param-name>account</param-name>
+  			<param-value>tester</param-value>
+  		</init-param>
+  		<init-param>
+  			<param-name>password</param-name>
+  			<param-value>1234</param-value>
+  		</init-param>
+  		<load-on-startup>2</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>InitParamEx</servlet-name>
+  	<url-pattern>/init</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
