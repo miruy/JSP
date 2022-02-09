@@ -29,7 +29,19 @@ public class ControllerAction extends HttpServlet{
 //      properties파일(CommandPro.properties)을 읽어
 //      Map객체인 commandMap에 저장한다.
 //     
-    
+    /*
+     * 1. 사용자가 url로 어떤 파일을 요청
+     * 2. web.xml에서 해당 url의 마지막 명 (.do / .jsp 등)을 확인항 
+     * 3. 마지막 명이 매핑되어 있는 것의 이름을 따라 이동 (controllerAction)
+     * 4. controllerAction파일에서 초기화메서드인 init()를 실행 
+     * 5-1. init()에서 42행 : propertyConfig를 매개변수로 초기화를 하여 props객체에 담음 
+     * 5-2. 이때 propertyConfig 데어터가 있는 CommandPro.properties로 이동하여 1번에서 사용자가 요청한
+     * url주소(여기서 키)와 맞는 value값을 문자열 그대로 가져와서 props객체에 저장하는 것 
+     * 6. 우선 따로 pr이라는 Properties객체를 생성함 
+     * 7. 50행 : 내가만든 프로젝트의 경로를 알려주는 코드로 path라는 객체에 저장 
+     * 8. FileInputStream라는 빨대 객체를 이용하여 f라는 빨대 객체에 해당파일의 경로와 파일명을 담음 
+     * 9. 57행 : 으로 그 빨대 객체를 6번에서 만든 객체에 담음으로써 MAP 클래스의 키와 밸류로 저장
+     * */
 //    web.xml에서 propertyConfig에 해당하는 init-param의 값을 읽어온다.
     public void init(ServletConfig config) throws ServletException{
         String props = config.getInitParameter("propertyConfig");
