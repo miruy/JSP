@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판</title>
-<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/liststyle.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/boardtwo/css/style.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/boardtwo/css/liststyle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <section>
@@ -48,18 +48,18 @@
         </td>
         <td class="titletd">
             <c:if test="${article.depth > 0}">
-                <img src="${pageContext.request.contextPath}/resources/images/level.gif"
+                <img src="${pageContext.request.contextPath}/boardtwo/images/level.gif"
                     width="${5 * article.depth}">
-                <img src="${pageContext.request.contextPath}/resources/images/re.gif">
+                <img src="${pageContext.request.contextPath}/boardtwo/images/re.gif">
             </c:if>
             <c:if test="${article.depth == 0}">
-                <img src="${pageContext.request.contextPath}/resources/images/level.gif"
+                <img src="${pageContext.request.contextPath}/boardtwo/images/level.gif"
                     width="${5 * article.depth}">
             </c:if>
             <a href="${pageContext.request.contextPath}/board/content.do?num=${article.num}&pageNum=${currentPage}">
                 ${article.subject}</a>
             <c:if test="${article.readcount >= 20}">
-                <img src="${pageContext.request.contextPath}/resources/images/hot.gif">
+                <img src="${pageContext.request.contextPath}/boardtwo/images/hot.gif">
             </c:if>
         </td>
         <td>
