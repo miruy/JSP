@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="refRoom.RefRoomDao" %>  
+<%@ page import="refRoom.RefRoomDto" %>  
+<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
@@ -27,37 +30,34 @@
 	<h3>자료실</h3>
 	<br>
 	<article>
-	
-
-
+	<%
+		if (count == 0) {
+	%>
 	<table>
 		<tr>
 			<td>자료실에 등록된 파일이 없습니다.</td>
+		</tr>	
 	</table>
-	
+	<%
+		} else {
+	%>
 		<table>
 			<tr>
 				<th id="num">No.</th>
-			</tr>
-			
-			<tr>
 				<th id="content">File Description</th>
-			</tr>
-			
-			<tr>
 				<th id="filename">File Name</th>
-			</tr>
-			
-			<tr>
-				<th id="uploader">Uploader</th>
-			</tr>
-			
-			<tr>
+				<th id="uploader">Up loader</th>
 				<th id="readcount">Count</th>
 			</tr>
-	
+	<%
+		for(int i = 0; i < aricleList.size(); i++){
+			RefRoomDto article = (RefRoomDto) articleList.get(i);
+		}
+	%>
 			
-			
+	<%
+		}
+	%>			
 		</table>
 	</article>	
 </section>

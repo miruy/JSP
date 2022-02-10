@@ -107,7 +107,7 @@ public class BoardDao {
                 number = rs.getInt(1) + 1;
             } else { number = 1; }
             if(num != 0){    //답글일 경우
-            sql = "update BOARD set STEP = STEP+1 where REF = ? and STEP > ?";
+            sql = "update BOARD set STEP = STEP + 1 where REF = ? and STEP > ?";
                 pstmt.close();
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1, ref);
@@ -286,13 +286,13 @@ public class BoardDao {
           
            if(rs.next()) {
         	   dbPass = rs.getString("pass");
-        	   if(dbPass.equals("pass")) {
+        	   if(dbPass.equals(pass)) {
         		   pstmt.close();
         		   pstmt = conn.prepareStatement(
         				   "delete from BOARD where NUM = ?");
         		   pstmt.setInt(1, num);
         		   pstmt.executeUpdate();
-        		   result = 1;	//수정성공
+        		   result = 1;	//삭제 성공
         	   }else {
         		   result = 0;	//비밀번호 불일치  
         	   }

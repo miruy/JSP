@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <script src="${pageContext.request.contextPath}/boardtwo/script.js"></script>
+<link href="${pageContext.request.contextPath}/boardtwo/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/boardtwo/css/writeFormstyle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 	<section>

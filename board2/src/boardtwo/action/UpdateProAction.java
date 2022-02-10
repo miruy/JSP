@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import boardtwo.model.BoardDao;
 import boardtwo.model.BoardDto;
 
-public class UpdateProAction {
+public class UpdateProAction implements CommandAction{
 	public String requestPro(
 			HttpServletRequest request,
             HttpServletResponse response)throws Throwable{

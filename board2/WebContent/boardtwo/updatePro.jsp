@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
-<c:if test="${check == 1 }">
-	<meta http-equiv="Refresh" content=
-	"0;url=${pageContext.request.contextPath }/board/list.do?pageNum=${pageNum }">
+<c:if test="${check == 1 }"> 
+<meta http-equiv="Refresh"	content="0;url=${pageContext.request.contextPath}/board/list.do">
 </c:if>
 
 <c:if test="${check == 0 }">
@@ -14,6 +13,8 @@
 <head>
 <meta charset="UTF-8">
 <title>updatePro</title>
+<link href="${pageContext.request.contextPath}/boardtwo/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/boardtwo/css/writeFormstyle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 	<br><br>

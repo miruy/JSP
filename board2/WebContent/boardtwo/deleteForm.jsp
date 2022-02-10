@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
+<link href="${pageContext.request.contextPath}/boardtwo/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/boardtwo/css/deleteFormstyle.css" rel="stylesheet" type="text/css"/>
 <script>
 	function deleteSave(){
 		if(document.delForm.pass.value == ""){

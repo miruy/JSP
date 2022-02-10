@@ -72,14 +72,18 @@ number = count - (currentPage - 1) * pageSize;
 				<tr>
 					<td><%=number--%></td>
 					<td class="titletd">
-						<!-- 수정 5 시작 --> <%
+						<!-- 수정 5 시작 --> 
+<%
  	int wid = 0;
- if (article.getDepth() > 0) {
+ 	if (article.getDepth() > 0) {
  	wid = 5 * (article.getDepth());
- %> <img src="images/level.gif" width="<%=wid%>"> <img
-						src="images/re.gif"> <%
+ %> 
+ <img src="images/level.gif" width="<%=wid%>"> 
+ <img src="images/re.gif"> 
+ <%
  	} else {
- %> <img src="images/level.gif" width="<%=wid%>"> <%
+ %> <img src="images/level.gif" width="<%=wid%>">
+ <%
  	}
  %> <!-- 수정 5 끝--> <a
 						href="content.jsp?num=<%=article.getNum()%>&pageNum=<%=currentPage%>">
