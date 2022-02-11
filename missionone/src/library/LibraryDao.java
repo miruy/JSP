@@ -1,4 +1,4 @@
-package refRoom;
+package library;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,11 +12,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class RefRoomDao {
-	private static RefRoomDao instance = null;
+public class LibraryDao {
+	private static LibraryDao instance = null;
 	private DataSource pool;
 	
-	private RefRoomDao() {
+	private LibraryDao() {
 		try {
 			Context ctx = new InitialContext();
 			pool = (DataSource)ctx.lookup("java:comp/env/jdbc/myOracle");
@@ -25,10 +25,10 @@ public class RefRoomDao {
 		}
 	}
 	
-	public static RefRoomDao getInstance() {
-		synchronized(RefRoomDao.class) {
+	public static LibraryDao getInstance() {
+		synchronized(LibraryDao.class) {
 			if(instance == null) {
-				instance = new RefRoomDao();
+				instance = new LibraryDao();
 			}	
 		}
 		return instance;
@@ -37,7 +37,7 @@ public class RefRoomDao {
 	//여기부터 자료실 기능에 필요한 메서드 구현 
 	
 	
-	public void uploadFile(RefRoomDto uploadFile) {
+	public void uploadFile(LibraryDto uploadFile) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -47,7 +47,7 @@ public class RefRoomDao {
 		
 		try {
 			conn = ConnUtil.getConnection();
-			pstmt = conn.prepareStatement("select max(NUM) from REFROOM");
+			pstmt = conn.prepareStatement("select max(NUM) from LIBRARY");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -55,7 +55,7 @@ public class RefRoomDao {
 			}else {
 				number = 1;
 			}
-			sql = "insert into REFROOM"
+			sql = "insert into LIBRARY"
 				+ "(NUM, UPLOADER, PASS, SUBJECT, CONTENT)"
 				+ "values(REFROOM_SEQ.nextval, ?,?,?,?)";
 			pstmt.close();

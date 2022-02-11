@@ -1,6 +1,6 @@
-package refRoom;
+package library;
 
-public class RefRoomDto {
+public class LibraryDto {
 	private int num;
 	private String upLoader;
 	private String pass;
@@ -8,7 +8,7 @@ public class RefRoomDto {
 	private String content;
 	private int readcount;
 	
-	public RefRoomDto() {}
+	public LibraryDto() {}
 
 	public int getNum() {
 		return num;
