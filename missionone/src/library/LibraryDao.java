@@ -57,7 +57,7 @@ public class LibraryDao {
 			}
 			sql = "insert into LIBRARY"
 				+ "(NUM, UPLOADER, PASS, SUBJECT, CONTENT)"
-				+ "values(REFROOM_SEQ.nextval, ?,?,?,?)";
+				+ "values(LIBRARY_SEQ.nextval, ?,?,?,?)";
 			pstmt.close();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uploadFile.getUpLoader());
