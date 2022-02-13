@@ -2,9 +2,9 @@ package library;
 
 public class LibraryDto {
 	private int num;
-	private String upLoader;
+	private String	fileUpload;
+	private String uploader;
 	private String pass;
-	private String subject;
 	private String content;
 	private int readcount;
 	
@@ -18,12 +18,20 @@ public class LibraryDto {
 		this.num = num;
 	}
 
-	public String getUpLoader() {
-		return upLoader;
+	public String getFileUpload() {
+		return fileUpload;
 	}
 
-	public void setUpLoader(String upLoader) {
-		this.upLoader = upLoader;
+	public void setFileUpload(String fileUpload) {
+		this.fileUpload = fileUpload;
+	}
+
+	public String getUploader() {
+		return uploader;
+	}
+
+	public void setUploader(String uploader) {
+		this.uploader = uploader;
 	}
 
 	public String getPass() {
@@ -32,14 +40,6 @@ public class LibraryDto {
 
 	public void setPass(String pass) {
 		this.pass = pass;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
 	}
 
 	public String getContent() {
@@ -57,6 +57,6 @@ public class LibraryDto {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-
+	
 	
 }
