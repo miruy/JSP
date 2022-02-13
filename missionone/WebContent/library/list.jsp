@@ -42,7 +42,10 @@
 			<c:forEach var="file" items="${fileList }">		
 			<tr>
 				<td><c:out value="${file.num }"/></td>
-				<td><c:out value="${file.fileUpload }"/></td>
+				<td>
+					<a href="${pageContext.request.contextPath }/library/content.jsp?num=${file.num }">
+						${file.fileUpload }</a>
+				</td>		
 				<td><c:out value="${file.uploader }"/></td>
 				<td><c:out value="${file.content }"/></td>	
 				<td><c:out value="${file.readcount }"/></td>
@@ -50,13 +53,13 @@
 			</c:forEach>
 		</table><br>
 		<input type="button" value="파일 올리기"
-					onClick="window.location='uploadForm.jsp'">
+					onClick="document.location.href='${pageContext.request.contextPath }/library/uploadForm.jsp'">
 	</c:if>
 
 	<c:if test="${fileCount == 0 }">
 			자료실에 등록된 파일이 없습니다.
 			<input type="button" value="파일 올리기"
-					onClick="window.location='uploadForm.jsp'">
+					onClick="document.location.href='${pageContext.request.contextPath }/library/uploadForm.jsp'">
 	</c:if>	
 </section>
 	

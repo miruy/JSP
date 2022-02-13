@@ -11,7 +11,7 @@
 	request.setCharacterEncoding("UTF-8");
 
 	String savePath = "/library/upload";	//업로드된 파일이 저장될 위치
-	int uploadFileSizeLimit = 10000 * 1024 * 1024;	//파일이 저장된 시간
+	int uploadFileSizeLimit = 5 * 1024 * 1024;	//저장할 수 있는 파일의 크기 
 	String encType = "UTF-8";	//인코딩 설정
 	
 	ServletContext context = getServletContext();	
@@ -28,7 +28,7 @@
 	
 	MultipartRequest multi = new MultipartRequest(	/*파일업로드 클래스 */
 			request, uploadFilePath, uploadFileSizeLimit, encType, new DefaultFileRenamePolicy());	
-	//요청객체, 서버상의 파일 저장위치, 파일이 저장된 시간, 인코딩 타입, 파일의 이름이 같으면 뒤에 숫자를 붙혀 구별해주는 생성자
+	//요청객체, 서버상의 파일 저장위치, 저장할 수 있는 파일의 크기 , 인코딩 타입, 파일의 이름이 같으면 뒤에 숫자를 붙혀 구별해주는 생성자
 	//를(5가지) 매개변수로 넣어 파일업로드 객체 생성 
 	
 	
