@@ -48,7 +48,7 @@
 			<td>File</td>
 			<td colspan="2">
 			<a href="${pageContext.request.contextPath }/library/upload/${ldt.fileUpload }" 
-			download="${ldt.fileUpload }">${ldt.fileUpload }</a>
+				download="${ldt.fileUpload }">${ldt.fileUpload }</a>
 			</td>
 		</tr>
 		

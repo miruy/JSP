@@ -1,5 +1,6 @@
 package library;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -238,5 +239,57 @@ public class LibraryDao {
 		}
 		return result;
 	}
+	
+	//파일 수정 메서드
+	public int update(LibraryDto ldt, String updateFile) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			conn = ConnUtil.getConnection();
+			pstmt = conn.prepareStatement(
+					"update LIBRARY set FILE_UPLOAD = ?, PASS = ?, CONTENT = ? where NUM = ? ");
+
+			pstmt.setString(1, ldt.getFileUpload());
+			pstmt.setString(2, ldt.getPass());
+			pstmt.setString(3, ldt.getContent());
+			pstmt.setInt(4, ldt.getNum());
+
+			result = pstmt.executeUpdate();
+
+			if (result == 1) {
+				System.out.println(result);
+			}
+			
+			File f = new File(updateFile);	//updateFile객체가 존재한다면 파일 지우기 
+			if(f.exists()){
+				f.delete();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+		return result;
+	}
 
 }
+
+
+
+
+
+
+
+
